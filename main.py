@@ -11,14 +11,12 @@ logging.basicConfig(level=logging.INFO)
 
 class TestResource(object):
     def on_get(self, req, res):
-        """Handles all GET requests."""
-        logging.info("Received GET params: " + str(req.params))
-        logging.info("Received payload: " + str(req.media))
-
-        sudoku_input = req.params['sudoku']
+        sudoku_input = req.params['grid']
+        logging.info('Solving sudoku for input params:' + sudoku_input)
         solution = self.solve(sudoku_input)
-        res.status = falcon.HTTP_200  # This is the default status
-        res.body = 'Solved!\n' + str(solution)
+        logging.info('Solved!')
+        res.status = falcon.HTTP_200
+        res.body = str(solution)
 
     def reduce_puzzle(self, values, naked=True):
         """
@@ -45,9 +43,6 @@ class TestResource(object):
         return [s + t for s in a for t in b]
 
     def solve(self, diag_sudoku_grid):
-        #diag_sudoku_grid = '2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3'
-
-        assignments = []
 
         rows = 'ABCDEFGHI'
         cols = '123456789'
@@ -76,4 +71,4 @@ app = falcon.API()
 test_resource = TestResource()
 
 # Add a route to serve the resource
-app.add_route('/test', test_resource)
+app.add_route('/sudoku', test_resource)

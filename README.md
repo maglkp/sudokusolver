@@ -1,12 +1,14 @@
 # sudokusolver
 Sudoku solver falcon framework powered PCF app
 
+Endpoint usage: `http://localhost:8000/sudoku?grid=2.............62....1....7...6..8...3...9...7...6..4...4....8....52.............3`
+
 ## Launching the app locally (example commands for Ubuntu/Debian)
 * install git, python and virtualenv `sudo apt-get install virtualenv`
 * create a python 3 virtual env `virtualenv venv -p /usr/bin/python3` (not strictly needed but gives better confidence that app would work in the cloud)
 * activate the environment `source venv/bin/activate` (`venv\Scripts\activate.bat` on windows)
 * install the requirements `pip install -r requirements.txt` (can also install gunicorn globally)
-* run `gunicorn main:app`, you can provide more args `gunicorn -b 0.0.0.0:5000 main:app --reload`
+* run `gunicorn main:app`, you can provide more args `gunicorn -b 0.0.0.0:8000 main:app --reload`
 * head over to http://localhost:8000/test (or curl or `http you-url` if you have httpie, highly recommend it)
 
 ## Running in Pivotal Cloud Foundry
